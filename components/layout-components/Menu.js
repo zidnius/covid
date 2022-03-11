@@ -1,24 +1,67 @@
-import { Menu, Icon } from 'antd'
+import { Menu } from 'antd'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { getUser } from '../../api/user'
 
-const keys = ['/', '/sculptures', '/makers', '/users', '/recent-activity']
+const keys = ['/materi', '/tugas', '/user', '/pelajaran', '/pengajar', '/kelas', '/']
 
-const menu = [
-  <Menu.Item key={keys[0]} style={{ background: '#d1d1d1' }}>
-    <Link href={keys[0]}>
-      <a>
-        <Icon type="dashboard" style={{ color: '#494949' }} />
-        <span style={{ color: "#494949" }}>Dashboard</span>
-      </a>
-    </Link>
-  </Menu.Item>
-]
 
 export default ({ style, closeDrawer }) => {
+  const [data, setData] = useState([])
   const router = useRouter()
   const currentPath = router.route
   let selectedKeys = []
+  let menu = [
+    <Menu.Item key={keys[0]}>
+      <Link href={keys[0]}>
+        <a>
+          <span>Materi</span>
+        </a>
+      </Link>
+    </Menu.Item>,
+    <Menu.Item key={keys[1]}>
+      <Link href={keys[1]}>
+        <a>
+          <span>Tugas</span>
+        </a>
+      </Link>
+    </Menu.Item>
+  ]
+
+  if (data?.tipe && data.tipe === 'admin' || data?.tipe && data.tipe === 'guru') {
+    menu.push(...[
+      <Menu.Item key={keys[2]}>
+        <Link href={keys[2]}>
+          <a>
+            <span>User</span>
+          </a>
+        </Link>
+      </Menu.Item>,
+      <Menu.Item key={keys[3]}>
+        <Link href={keys[3]}>
+          <a>
+            <span>Pelajaran</span>
+          </a>
+        </Link>
+      </Menu.Item>,
+      <Menu.Item key={keys[4]}>
+        <Link href={keys[4]}>
+          <a>
+            <span>Pengajar</span>
+          </a>
+        </Link>
+      </Menu.Item>,
+      <Menu.Item key={keys[5]}>
+        <Link href={keys[5]}>
+          <a>
+            <span>Kelas</span>
+          </a>
+        </Link>
+      </Menu.Item>
+    ]
+    )
+  }
 
   for (let i = keys.length - 1; i >= 0; i--) {
     if (currentPath.includes(keys[i])) {
@@ -27,12 +70,23 @@ export default ({ style, closeDrawer }) => {
     }
   }
 
+  async function getData() {
+    await getUser()
+    let result = await localStorage.getItem('user')
+    result = JSON.parse(result)
+    setData(result)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <Menu
       theme="dark"
       mode="inline"
       selectedKeys={selectedKeys}
-      style={{ ...style, padding: '16px 0', background: '#a1a1a1' }}
+      style={{ ...style, padding: '16px 0' }}
       onClick={({ key }) => {
         closeDrawer()
         router.push(key)

@@ -65,7 +65,7 @@ class MyLayout extends React.Component {
           <Content
             style={{
               margin: '20px 16px 15px 16px',
-              background:'#f4f4f4'
+              background: '#f4f4f4'
             }}
           >
             {children}

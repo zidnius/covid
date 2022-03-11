@@ -51,14 +51,14 @@ class AppWrapper extends NextApp {
     return (
       <>
         <Head>
-          <title>Covid 19</title>
+          <title>LMS</title>
         </Head>
         <Layout collapsed={collapsed}>
           <Component {...pageProps} />
         </Layout>
       </>
     )
-  }
+  Î}
 }
 
 export default withRouter(AppWrapper)

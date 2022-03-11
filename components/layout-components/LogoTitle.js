@@ -23,14 +23,14 @@ const TitleWrapper = styled.div`
   overflow: hidden;
   line-height: 64px;
   transition: all 0.3s;
-  background: #878585;
+  background:#001528;
 `
 
 export default () => (
   <TitleWrapper>
     <Link href="/">
       <a style={{ display: 'inline-block' }}>
-        <Title>Logo</Title>
+        <Title>LMS</Title>
       </a>
     </Link>
   </TitleWrapper>
