@@ -54,11 +54,18 @@ class AppWrapper extends NextApp {
           <title>LMS</title>
         </Head>
         <Layout collapsed={collapsed}>
+          <div style={{ position: 'fixed', bottom: 0, right: 0, maxWidth: '100px' }}>
+            <img src="/static/olimpiade.png" style={{ width: '100%' }} />
+          </div>
+          <div style={{ position: 'fixed', bottom: 0, left: 0, maxWidth: '150px' }}>
+            <img src="https://suaranahdliyin.com/wp-content/uploads/2018/08/IPNU-IPPNU.jpg" style={{ width: '100%' }} />
+          </div>
           <Component {...pageProps} />
         </Layout>
       </>
     )
-  Î}
+    Î
+  }
 }
 
 export default withRouter(AppWrapper)
